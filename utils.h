@@ -29,4 +29,7 @@ typedef unsigned char byte;
 */
 char getType_Utils(int type);
 
+// Returns the absolute value of a number
+int abs(int n);
+
 #endif

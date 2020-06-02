@@ -2,23 +2,30 @@
 #define QUADTREE_H
 
 #include "cell.h"
-#include "utils.h"
 #include "quadtree.h"
+#include "point.h"
 
 typedef struct QuadNode {
+  Point p;
   Cell* cell;
-  int x, y;
-  struct QuadNode* quadrants[4]; // NE NO SE SO
 } QuadNode;
 
 typedef struct QuadTree {
-  struct QuadNode* root;
+  // Boundaries
+  Point topLeft;
+  Point botRight;
+
+  // Node
+  QuadNode* n;
+
+  struct QuadTree* quadrants[4]; // TL TR BL BR
 } QuadTree;
 
-QuadTree* new_QuadTree();
+QuadTree* new_QuadTree(int size);
 void insert_QuadTree(QuadTree* qt, Cell* cell, int x, int y);
 void search_QuadTree(QuadTree* qt, Cell** cell_found, int x, int y);
 void free_QuadTree(QuadTree* qt);
 bool hasCell_QuadTree(QuadTree* qt, int x, int y);
+int maxDepth(QuadTree* qt);
 
 #endif

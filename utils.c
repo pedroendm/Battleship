@@ -16,3 +16,8 @@ char getType_Utils(int type)
     // unreachable statement (Since, if it gets to the default case, the execution is aborted). Just to shutdown warning.
     return 0;
 }
+
+int abs(int n) {
+    if(n < 0) return -n;
+    return n;
+}

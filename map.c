@@ -214,7 +214,7 @@ static void attactchPiece(Map* map, Piece* piece)
 Map* new_Map(int size) {
   Map* map = (Map*)malloc(sizeof(Map));
   map->size = size;
-  map->qt = new_QuadTree();
+  map->qt = new_QuadTree(size);
   return map;
 }
 

@@ -14,3 +14,14 @@ Point* new_Point(int x, int y)
 
     return point;
 }
+
+void set_Point(Point* p, int x, int y)
+{
+    p->x = x;
+    p->y = y;
+}
+
+void free_Point(Point* p)
+{
+    free(p);
+}
