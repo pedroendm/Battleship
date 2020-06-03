@@ -73,7 +73,6 @@ Map* new_Map(int map_size)
         for(int y = 0; y < map->size; y++)
             map->cells[x][y] = new_Cell();
     }
-
     return map;
 }
 
@@ -151,8 +150,6 @@ char getPieceType_Map(Map* map, int x, int y)
     return getType_Piece(map->cells[x][y]->piece);
 }
 
-
-
 void free_Map(Map* map)
 {
     for(int x = 0; x < map->size; x++) {
@@ -210,12 +207,16 @@ static void attactchPiece(Map* map, Piece* piece)
     }
 }
 
-
-Map* new_Map(int size) {
-  Map* map = (Map*)malloc(sizeof(Map));
-  map->size = size;
-  map->qt = new_QuadTree(size);
-  return map;
+Map* new_Map(int size) 
+{
+    Map* map = (Map*)malloc(sizeof(Map));
+    if(map == NULL)
+        prompt_IO(ERROR_IO, "map.c, new_Map(): malloc failed");
+    
+    map->size = size;
+    map->qt = new_QuadTree(size);
+   
+    return map;
 }
 
 
@@ -229,29 +230,13 @@ int addPiece_Map(Map* map, Piece* piece)
   return -1;
 }
 
-/*
-    Function used to represent an attack.
-    This function returns an int, signaling the sucess of the attack.
-    If the return value is -1, than the attack went outside the map.
-    If the return value is 0, than was attacked a cell without piece.
-    If the return value is 1, than there was a piece of type I, not hitted, that is, was a hit shot.
-    If the return value is 2, than there was a piece of type P, not hitted, that is, was a hit shot.
-    If the return value is 3, than there was a piece of type T, not hitted, that is, was a hit shot.
-    If the return value is 4, than there was a piece of type X, not hitted, that is, was a hit shot.
-    If the return value is 5, than there was a piece of type Z, not hitted, that is, was a hit shot.
-    If the return value is 6, than there was a piece, but was already destroyed.
- */
 int registerAttack_Map(Map* map, int x, int y)
 {
-    /*
-        Attack outside the map.
-        This needs to be verified first, to not cause a segmentation fault
-        on the call made next to the function getPieceStatus,
-        which would try to acess invalid positions on the map.
-    */
+    // Attack outside the map.
     if(x < 0 || x >= map->size || y < 0 || y >= map->size)
         return -1;
     
+    // Search for the cell, on position (x,y)
     Cell* cell_found = NULL;
     search_QuadTree(map->qt, &cell_found, x, y);
     
@@ -281,45 +266,64 @@ int registerAttack_Map(Map* map, int x, int y)
         // Case it's an invalid piece status: notify and abort execution
         default: prompt_IO(ERROR_IO, "map.c, registerAttack_Map(): invalid piece status");
     }
-  return -1;
+
+    // unreachable statement (Since, if it gets to the default case, the execution is aborted). Just to shutdown warning.
+    return 0;
 }
 
 void registerShot_Map(Map* map, int x, int y, byte b)
 {
+  // Search for the cell on position (x,y).
   Cell* cell_found = NULL;
   search_QuadTree(map->qt, &cell_found, x, y);
+  
+  // If it's NULL then doesn't exist a node on the tree with the point (x,y), we must add one.
   if(cell_found == NULL) {
       Cell* cell = new_Cell();
       cell->shot = b;
       insert_QuadTree(map->qt, cell, x, y);
-  } else
+  }
+  // Case it exists. 
+  else
     cell_found->shot = b;
 }
 
 int getPieceStatus_Map(Map* map, int x, int y)
 {
+  // Search for the cell on position (x,y).
   Cell* cell_found = NULL;
   search_QuadTree(map->qt, &cell_found, x, y);
+  
+  // Case no cell or piece.
   if(cell_found == NULL || cell_found->piece == NULL) 
     return 0;
+  // Case there's a piece.
   else
     return getStatus_Piece(cell_found->piece, x, y);
 }
 
 int getShotStatus_Map(Map* map, int x, int y)
 {
+  // Search for the cell on position (x,y).
   Cell* cell_found = NULL;
   search_QuadTree(map->qt, &cell_found, x, y);
+  
+  // Case there's no cell.
   if(cell_found == NULL)
     return 0;
+  // Case there's a cell.
   else
     return cell_found->shot;
 }
 
 char getPieceType_Map(Map* map, int x, int y)
 {
+    // Search for the cell on position (x,y).
     Cell* cell;
     search_QuadTree(map->qt, &cell, x, y);
+
+    // As stated in the header file, this function doesn't validate if the piece exists, 
+    // since everytime we use this function, we know the piece already exist.
     return getType_Piece(cell->piece);
 }
 

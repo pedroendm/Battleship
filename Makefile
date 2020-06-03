@@ -2,7 +2,7 @@
 quadtree: main.o utils.o game.o io.o player.o quadtree.o MAPQUADTREE cell.o piece.o bitmap.o point.o
 	gcc -std=c99 *.o -o game
 
-matrix: main.o utils.o game.o io.o player.o MAPMATRIX cell.o piece.o bitmap.o point.o
+matrix: main.o utils.o game.o io.o player.o MAPMATRIX cell.o piece.o bitmap.o
 	gcc -std=c99 *.o -o game
 
 main.o: main.c

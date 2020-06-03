@@ -1,11 +1,18 @@
 TP2_C: Pedro Mota, up201805248
 
-# Compilação e execução #
-Para compilar, basta executar o comando: make
+Relativamente ao projeto, apenas fiz as alíneas a e b, ou seja, as implementações com matrizes e quadtrees.
+Uma vez que tinha deixado tudo bem modular, com umas simples alterações consegui ter os dois suportes a funcionar, rapidamente.
+Apenas implementei as quadtrees (ficheiros: quadtree.c, quadtree.h) e reimplementei a API de map.h (decidi deixar no ficheiro map.c, na mesma, 
+junto da implementação das matrizes, separadas pelas macros, pois, permitiu-me seguir o mesmo raciocínio, 
+com comparações diretas, o que pode também ajudar o professor, na avaliação).
 
-Depois de compilar, para começar a execução do jogo: ./game
+################# Compilação e execução ############################
+Para compilar com as quadtrees, basta executar o comando: 'make quadtree' (ou apenas, 'make').
+Para compilar com as matrizes, basta executar o comando: 'make matrix'.
 
-# Regras/Funcionamento do jogo #
+Depois de compilar, para ambos os casos, para começar a execução do jogo: ./game
+
+################# Regras/Funcionamento do jogo ###########################
 
 NOTA: - Todo o input é validado. É suposto o jogo não crashar com input inválido e dá ainda feedback personalizado para os inputs inválidos.
 
@@ -38,7 +45,7 @@ Quando um player fica com as peças todas destruídas, o jogo acaba e o sistema 
 Por fim, é pedido se os players desejam jogar novamente, ou não.
 Caso sim, todo este processo descrito repete-se, caso não, a execução do jogo termina.
 
-# Módulos do jogo #
+############### Módulos do jogo ###################
 A ideia foi tentar ser o mais modular possível, de maneira a que alterações na forma como uma coisa funciona, não cause problemas noutra.
 
 bitmap.h
@@ -75,3 +82,12 @@ Toda a atividade de IO é aqui realizada, através de uma função.
 
 utils.h
 Utilitários.
+
+quadtree.h
+Definição da quadtree.
+A ideia da implementação é que divido o espaço 2D em 4 regiões TL TR BL BR, recursivamente.
+Se a região contém, pelo menos, um nó, ao adicionar um novo, adiciono na nova subdivisão do espaço.
+Caso não tenha, guardo no atual, não é feita nenhuma subdivisão.
+
+point.h
+Representação de um ponto 2D.
