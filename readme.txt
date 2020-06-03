@@ -2,11 +2,12 @@ TP2_C: Pedro Mota, up201805248
 
 Relativamente ao projeto, apenas fiz as alíneas a e b, ou seja, as implementações com matrizes e quadtrees.
 Uma vez que tinha deixado tudo bem modular, com umas simples alterações consegui ter os dois suportes a funcionar, rapidamente.
-Apenas implementei as quadtrees (ficheiros: quadtree.c, quadtree.h) e reimplementei a API de map.h (decidi deixar no ficheiro map.c, na mesma, 
+Apenas implementei as quadtrees (ficheiros: quadtree.c, quadtree.h, precisei também de definir a noção de ponto 2D: point.c, point.h)
+e reimplementei a API de "map", com as quadtrees (a implementação ficou no ficheiro map.c, também, 
 junto da implementação das matrizes, separadas pelas macros, pois, permitiu-me seguir o mesmo raciocínio, 
 com comparações diretas, o que pode também ajudar o professor, na avaliação).
 
-################# Compilação e execução ############################
+################# Compilação e execução #################################
 Para compilar com as quadtrees, basta executar o comando: 'make quadtree' (ou apenas, 'make').
 Para compilar com as matrizes, basta executar o comando: 'make matrix'.
 
