@@ -11,7 +11,9 @@ com comparações diretas, o que pode também ajudar o professor, na avaliação
 Para compilar com as quadtrees, basta executar o comando: 'make quadtree' (ou apenas, 'make').
 Para compilar com as matrizes, basta executar o comando: 'make matrix'.
 
-Depois de compilar, para ambos os casos, para começar a execução do jogo: ./game
+Depois de compilar, para ambos os casos, para começar a execução do jogo: './game'.
+
+Para remover os object files e o executável final: 'make clean'.
 
 ################# Regras/Funcionamento do jogo ###########################
 
