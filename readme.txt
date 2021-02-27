@@ -1,13 +1,7 @@
-TP2_C: Pedro Mota, up201805248
-
-Relativamente ao projeto, apenas fiz as alíneas a e b, ou seja, as implementações com matrizes e quadtrees.
-Uma vez que tinha deixado tudo bem modular, com umas simples alterações consegui ter os dois suportes a funcionar, rapidamente.
-Apenas implementei as quadtrees (ficheiros: quadtree.c, quadtree.h, precisei também de definir a noção de ponto 2D: point.c, point.h)
-e reimplementei a API de "map", com as quadtrees (a implementação ficou no ficheiro map.c, também, 
-junto da implementação das matrizes, separadas pelas macros, pois, permitiu-me seguir o mesmo raciocínio, 
-com comparações diretas, o que pode também ajudar o professor, na avaliação).
+Projeto realizado em ambiente acadêmico - CC2013, FCUP, 2019/20.
 
 ################# Compilação e execução #################################
+
 Para compilar com as quadtrees, basta executar o comando: 'make quadtree' (ou apenas, 'make').
 Para compilar com as matrizes, basta executar o comando: 'make matrix'.
 
@@ -48,8 +42,7 @@ Quando um player fica com as peças todas destruídas, o jogo acaba e o sistema 
 Por fim, é pedido se os players desejam jogar novamente, ou não.
 Caso sim, todo este processo descrito repete-se, caso não, a execução do jogo termina.
 
-############### Módulos do jogo ###################
-A ideia foi tentar ser o mais modular possível, de maneira a que alterações na forma como uma coisa funciona, não cause problemas noutra.
+############### Módulos ###################
 
 bitmap.h
 Definição do bitmap.
